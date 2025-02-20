@@ -1,0 +1,44 @@
+#define pinLedVermelho1 13
+#define pinLedVermelho2 5
+#define pinLedVerde1 11 
+#define pinLedVerde2 3
+#define pinLedAmarelo1 12
+#define pinLedAmarelo2 4 
+#define tempoLedVermelho1 5000
+#define tempoLedVermelho2 5000
+#define tempoLedVerde1 3000
+#define tempoLedVerde2 3000
+#define tempoLedAmarelo1 2000
+#define tempoLedAmarelo2 2000
+
+
+void setup ()
+{ 
+  pinMode (pinLedVermelho1, OUTPUT);
+  pinMode (pinLedVermelho2, OUTPUT);
+  pinMode (pinLedVerde1, OUTPUT); 
+  pinMode (pinLedVerde2, OUTPUT);
+  pinMode (pinLedAmarelo1, OUTPUT);
+  pinMode (pinLedAmarelo2, OUTPUT);
+}
+void loop ()
+{
+ digitalWrite (pinLedVerde1, HIGH);
+ digitalWrite (pinLedVermelho2, HIGH);
+ delay (tempoLedVermelho2);
+ delay (tempoLedVerde1);
+ digitalWrite (pinLedVerde1, LOW);
+ digitalWrite (pinLedAmarelo1, HIGH);
+ delay (tempoLedAmarelo1);
+ digitalWrite (pinLedAmarelo1, LOW);
+ digitalWrite (pinLedVermelho2, LOW);
+ digitalWrite (pinLedVermelho1, HIGH);
+ digitalWrite (pinLedVerde2, HIGH);
+ delay (tempoLedVermelho1);
+ delay (tempoLedVerde2);
+ digitalWrite (pinLedVerde2, LOW);
+ digitalWrite (pinLedAmarelo2, HIGH);
+ delay (tempoLedAmarelo2);
+ digitalWrite (pinLedAmarelo2, LOW);
+ digitalWrite (pinLedVermelho1, LOW);
+}
