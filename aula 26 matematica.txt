@@ -1,0 +1,67 @@
+/* 
+nome do arquivo:aula 27
+autor: Erica Liborio 
+data:25/02/2025
+descricao: atividade da aula 26 "matematica"
+
+*/
+
+
+
+
+
+int numero = 100;
+int resultado = 0;
+
+void setup()
+{
+  //Atividade 1
+  Serial.begin(9600);
+  
+  resultado = map (100, 0, 1023 ,0, 100);
+  resultado = constrain (numero, 20 ,80);
+  Serial.print("O valor final eh:  ");
+  Serial.println (resultado);
+  
+  //Atividade 2
+  
+  int valor = 0;
+  
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+  Serial.println (++valor);
+
+  
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);
+  Serial.println (--valor);  
+  
+  //Atividade 3
+  
+  int valor1 =5;
+  int valor2 =2;
+  float resultado = 0;
+  
+  resultado = (valor1 + valor2) /2.0;
+  Serial.print("A media aritimetica de 7 e:  ");
+  Serial.println (resultado);
+  
+}
+void loop()
+{
+  
+}
