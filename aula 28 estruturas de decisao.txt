@@ -1,0 +1,46 @@
+/*
+autor: Erica Liborio
+Data:26/02/2025
+Descricao: exercicio estruturas de decisao, aula 28.
+*/
+
+float peso = 69;
+float altura =1.65;
+float resultado = 0;
+
+void setup()
+{
+ Serial.begin(9600);
+  
+  resultado = peso / sq(altura); 
+  Serial.print ("o seu imc  eh: ");
+  Serial.println (resultado);
+  
+  float imc = peso / sq(altura); 
+  
+  if (imc <= 18.5){
+    Serial.println ("abaixo do peso normal");
+    
+  }else if ( imc <= 24.9){
+    Serial.println("peso normal");
+    
+  }else if  (imc >= 25 && imc <= 29.9){
+    Serial.println ("excesso de peso"); 
+    
+  }else if  (imc >= 30 && imc <= 34.9){
+    Serial.println ("obesidade classe 1");
+    
+  }else if  (imc >= 35 && imc <= 39.9){
+    Serial.println ("obesidade classe 2");
+    
+  }else if  (imc >= 40 ){
+    Serial.println ("obesidade classe 3");
+  }
+}
+
+void loop()
+{
+  
+}
+
+//.
