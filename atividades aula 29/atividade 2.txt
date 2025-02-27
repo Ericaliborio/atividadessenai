@@ -1,0 +1,16 @@
+// atividade 2
+
+#define pinLedVermelho 13
+float bateria = 20;
+
+void setup()
+{
+   pinMode (pinLedVermelho, OUTPUT);
+}
+
+void loop()
+{
+  if (bateria <= 20){
+     digitalWrite (pinLedVermelho, HIGH);
+  }
+}

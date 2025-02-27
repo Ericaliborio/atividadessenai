@@ -1,0 +1,20 @@
+     // ***ATIVIDADE 1***
+#define pinLedVermelho 13
+int temperatura = 30;
+
+void setup()
+{
+  Serial.begin(9600);
+ pinMode (pinLedVermelho, OUTPUT); 
+  }
+
+void loop()
+{
+ if (temperatura > 30){
+    digitalWrite (pinLedVermelho, HIGH);
+   
+ }else if ( temperatura < 30){
+    digitalWrite (pinLedVermelho, LOW);
+ }
+ 
+}

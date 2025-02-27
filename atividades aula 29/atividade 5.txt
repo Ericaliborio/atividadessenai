@@ -1,0 +1,25 @@
+//***ATIVIDADE 5***
+
+int salario = 900;
+int resultado = 0;
+int reajuste = 0;
+
+void setup()
+{
+ Serial.begin(9600);
+   Serial.println ("Nome erica");
+   Serial.println ("Cargo aprendiz");
+   Serial.print ("Antigo salario: "); Serial.println (salario);
+
+  
+  if  (salario < 1000){
+  resultado = salario * 10 /100 + salario;
+  Serial.print("novo salario: ");  
+  Serial.println (resultado);
+  }
+}
+
+void loop()
+{
+ 
+}

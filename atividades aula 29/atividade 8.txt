@@ -1,0 +1,22 @@
+//
+float nota1 = 6;
+float nota2 = 7;
+float nota3 = 7;
+float nota4 = 9;
+float media = 0;
+
+void setup()
+{
+ Serial.begin(9600);
+ media = (nota1+nota2+nota3+nota4)/4 ;
+   if  (media >= 7){
+     Serial.println ("APROVADO!");
+   }else if (media < 7){
+     Serial.println ("REPROVADO!");
+   }
+}
+
+void loop()
+{
+  
+}

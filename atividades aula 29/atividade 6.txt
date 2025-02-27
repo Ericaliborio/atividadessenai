@@ -1,0 +1,20 @@
+//***ATIVIDADE 6***
+int salario = 450;
+int resultado = 0;
+void setup()
+{
+ Serial.begin(9600);
+        
+ if (salario < 500){
+ resultado = salario * 1.30;
+ Serial.print("parabens! seu novo salario eh: ");  
+ Serial.println (resultado);
+ }else if ( salario > 500){
+    Serial.println("desculpe,voce nao tem direito");
+ }
+}
+
+void loop()
+{
+ 
+}

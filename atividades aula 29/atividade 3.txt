@@ -1,0 +1,18 @@
+//***ATIVIDADE 3***
+#define pinLedVermelho 13
+int numero = 6;
+int resto = 0;
+
+void setup()
+{
+  pinMode (pinLedVermelho, OUTPUT);
+}
+
+void loop()
+{
+  resto = numero % 2;
+
+    if (resto == 0){
+      digitalWrite (pinLedVermelho, HIGH);
+    }
+}

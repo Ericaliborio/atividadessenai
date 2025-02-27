@@ -1,0 +1,20 @@
+//***ATIVIDADE 7***
+int valor1 = 6;
+int valor2 = 7;
+void setup()
+{
+ Serial.begin(9600);
+ if (valor1 > valor2){
+ 
+ Serial.println ("valor1 e maior");
+   
+ }else if (valor1 < valor2){
+ Serial.println ("valor1 e maior");
+ }
+  
+}
+
+void loop()
+{
+  
+}
