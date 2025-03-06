@@ -1,3 +1,11 @@
+/*
+Nome do arquivo: aula 30 switch case 
+autor: Erica Liborio
+data: 06/03/2025
+ 
+*/
+
+
 #define pinLedVermelho 13
 #define pinLedLaranja 12
 #define pinLedBranco 11
