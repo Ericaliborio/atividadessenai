@@ -1,0 +1,28 @@
+unsigned long tempo = 0;
+unsigned long tempoAtual = 0;
+unsigned long intervalo = 1000;
+bool led = LOW;
+#define pinLedVermelho 12
+
+void setup()
+{
+  pinMode (pinLedVermelho, OUTPUT);
+}
+
+void loop()
+{
+  unsigned long tempoAtual = millis(); 
+  
+  if(tempoAtual - tempo >= intervalo) {
+  	tempo = tempoAtual;
+    
+  	if (led == LOW) {
+  		digitalWrite (pinLedVermelho, HIGH); 
+  		led = HIGH;
+    
+  	}else {
+  		digitalWrite (pinLedVermelho, LOW);
+          led = LOW;
+  }
+ }
+}
