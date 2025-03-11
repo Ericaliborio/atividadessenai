@@ -1,0 +1,42 @@
+/* 
+nome do arquivo:aula 34, BOTAO.
+autor: Erica Liborio 
+data:11/03/2025
+descricao: atividade da aula 34 "BOTAO"
+
+*/
+
+//-----VARIAVEIS GLOBAIS-----
+#define pinBotao 11
+#define pinLed 13
+unsigned long tempo = 0;
+unsigned long tempoAtual = 0;
+unsigned long intervalo = 500;
+bool led = LOW;
+
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(pinLed, OUTPUT);
+    pinMode(pinBotao, INPUT);
+}
+
+void loop()
+{
+ //ultilizar static 
+  
+  bool estadobotao = digitalRead(pinBotao);
+  unsigned long tempoAtual = millis(); 
+  
+  if (estadobotao){
+  	if(tempoAtual - tempo >= intervalo) {
+  		tempo = tempoAtual;
+    
+    	led = !led;
+    	digitalWrite(pinLed, led); 
+  	}
+  }
+  
+  else digitalWrite(pinLed,LOW);
+  
+}
