@@ -1,0 +1,50 @@
+/*
+nome do arquivo:aula 36, lcd.
+autor: Erica Liborio 
+data:13/03/2025
+descricao: atividade da aula 36 "lcd"
+*/
+
+
+#include <LiquidCrystal_I2C.h>
+#define pinBotao 2
+#define pinLed 13
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+bool led = 0;
+
+void setup()
+{
+  pinMode(pinLed, OUTPUT);
+  pinMode(pinBotao, INPUT);
+  lcd.init();
+  lcd.backlight();
+  pinMode (2, INPUT);
+ 
+}
+
+void loop()
+{
+ static bool estadoAnterior = 0;
+ bool estadoAtual = digitalRead(pinBotao);
+ 
+
+  if (estadoAtual == 1 && estadoAnterior == 0)
+  {
+         led = !led;
+    digitalWrite(pinLed, led); 
+   
+  lcd.setCursor(0,0);
+  if (led == 1){
+ 
+   lcd.print("led ligado    ");
+    
+  }else{
+   
+   lcd.print("led desligado   ");
+  }
+}
+ estadoAnterior = estadoAtual;
+  
+}

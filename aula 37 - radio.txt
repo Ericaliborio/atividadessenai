@@ -1,0 +1,22 @@
+/*
+nome do arquivo:aula 37, radio.
+autor: Erica Liborio 
+data:14/03/2025
+descricao: atividade da aula 37 "radio"
+*/
+
+
+int resultado = 0;
+int valor = 0;
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int valor = analogRead(A0);
+  resultado = map (valor, 0, 1023,0, 100);
+  Serial.print (resultado);
+  Serial.println ("%");
+}

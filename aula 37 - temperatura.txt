@@ -1,0 +1,41 @@
+/*
+nome do arquivo:aula 37, temperatura.
+autor: Erica Liborio 
+data:14/03/2025
+descricao: atividade da aula 37 "temperatura"
+*/
+
+int resultado = 0;
+int valor = 0;
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int valor = analogRead(A0);
+  if (valor <= 164){
+ 
+ Serial.println ("extremamente frio");
+  }else if (valor <=  348){
+ 
+ Serial.println ("muito frio");
+    
+ }else if (valor  <= 511){
+ 
+ Serial.println ("confortavel");
+    
+ }else if (valor  <= 675){
+ 
+ Serial.println ("um pouco quente");
+    
+ }else if (valor  <= 839){
+ 
+ Serial.println ("quente");
+    
+ }else if (valor  <= 1023){
+ 
+ Serial.println ("muito quente");
+  }
+}
