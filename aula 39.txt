@@ -1,0 +1,125 @@
+//****DECLARACAO DAS BIBLIOTECAS****
+#include <LiquidCrystal_I2C.h>
+
+//****DEFINICOES****
+#define pinLed1 10
+#define pinLed2 11
+#define Botao1 0
+#define Botao2 145  
+#define Botao3 329
+#define Botao4 505
+#define Botao5 741
+#define valorSolto 1023
+
+//****INSTANCIAS DE OBJETOS****
+LiquidCrystal_I2C lcd (0x27, 16, 2);
+
+void setup()
+{
+  lcd.init(); //INICIA O LCD
+  lcd.backlight(); //LIGA A LUZ DE FUNDO
+  pinMode(pinLed1, OUTPUT);
+  pinMode(pinLed2, OUTPUT);
+  lcd.setCursor(1,0);
+  lcd.print("  LED A OFF");
+  lcd.setCursor(1,1);
+  lcd.print("  LED B OFF");
+  
+}
+
+void loop()
+{
+  int valor = analogRead(A0);
+  static int valorAnterior = 1023;
+  static bool posicao = 0;
+  static bool atualizacao = 0;
+  static bool estadoLedA = 0;
+  static bool estadoLedB = 0;
+  
+  
+  //BOTAO 1
+  if(valor == Botao1 && valorAnterior == 1023)
+  {
+    posicao = 0;
+    atualizacao = 1;
+  }
+  //BOTAO 2
+  if(valor  >= Botao2 * 0.9 && valor <= Botao2 * 1.1 
+        && valorAnterior == 1023 )
+  {
+    posicao = 1;
+    atualizacao = 1;
+  }
+  //BOTAO 3
+   if ( valor  >= Botao3 * 0.9 && valor <= Botao3 * 1.1 
+           && valorAnterior == 1023 ){}
+  
+  //BOTAO 4
+   if ( valor  >= Botao4 * 0.9 && valor <= Botao4 * 1.1
+           && valorAnterior == 1023 ){}
+  
+  //BOTAO 5
+   if (valor  >= Botao5 * 0.9 && valor <= Botao5 * 1.1  &&
+       valorAnterior == 1023 )
+  {                                                     
+     
+        atualizacao = 1;
+        if(posicao)
+        {
+          estadoLedB = !estadoLedB;
+          digitalWrite(pinLed2, estadoLedB);
+        }
+     
+        else
+        {
+          estadoLedA = !estadoLedA;
+          digitalWrite(pinLed1, estadoLedA);
+        }
+      
+    
+ 	}
+  
+  
+  
+  if (atualizacao == 1){
+      atualizacao = 0;
+    
+  //ESTADO LED A
+       lcd.setCursor(2,0);
+    
+       if (estadoLedA == 1)
+       lcd.print("LED A ON  ");
+    
+       else 
+       lcd.print("LED A OFF ");
+     
+        
+  //ESTADO LED B
+       lcd.setCursor(2,1);
+    
+       if (estadoLedB == 1)
+       lcd.print("LED B ON  ");
+  
+       else  
+       lcd.print("LED B OFF ");  
+   }
+  
+  valorAnterior = valor ;
+  
+  //ATUALIZA O DISPLAY
+  if(posicao == 0 )
+  {
+    lcd.setCursor(0,0);
+    lcd.print(">");
+    lcd.setCursor(0,1);
+    lcd.print(" ");
+  } 
+  else if (posicao == 1 )
+  {
+    lcd.setCursor(0,1);
+    lcd.print(">");
+    lcd.setCursor(0,0);
+    lcd.print(" ");
+  }
+  
+}

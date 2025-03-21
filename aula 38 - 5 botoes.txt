@@ -1,0 +1,60 @@
+#include <LiquidCrystal_I2C.h>
+
+#define pinLed1 10
+#define pinLed2 11
+#define Botao1 0
+#define Botao2 145
+#define Botao3 329
+#define Botao4 505
+#define Botao5 741
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(pinLed1, OUTPUT);
+  pinMode(pinLed2, OUTPUT);
+  
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop()
+{
+  
+  int valor = analogRead(A0);
+  
+  if(valor == Botao1){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Botao 1     ");
+     
+  }  if(valor == Botao2){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Botao 2     ");
+      
+  }  if(valor == Botao3){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Botao 3     ");
+        
+        
+  }   if(valor == Botao4){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Botao 4     ");
+  
+         
+  }   if(valor == Botao5){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Botao 5     ");
+  
+  }if(valor == 1023){
+  
+  lcd.setCursor(0,0);
+  lcd.print("nenhum botao ");
+  }
+}
