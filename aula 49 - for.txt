@@ -1,0 +1,34 @@
+#include <Arduino.h>
+
+#define pinLed1 2
+#define pinLed2 3
+#define pinLed3 4
+#define pinLed4 5
+#define pinLed5 20
+#define pinBoot 0
+
+void setup() {
+  pinMode(pinBoot, INPUT_PULLUP);
+  Serial.begin(9600);
+
+  int soma = 0;
+
+  
+  for (int i = 1; i <= 10; i++) {  
+    
+    for (int tabuada = 1; tabuada <= 10; tabuada++)
+     { 
+      soma = i * tabuada;
+      Serial.print(i);
+      Serial.print(" x ");
+      Serial.print(tabuada);
+      Serial.print(" = ");
+      Serial.println(soma);
+    }
+     
+  }
+}
+
+void loop() 
+{
+}
