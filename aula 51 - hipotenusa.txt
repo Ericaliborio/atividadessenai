@@ -1,0 +1,18 @@
+#include <Arduino.h>
+float hipotenusa(float, float);
+
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println(hipotenusa(4, 3));
+}
+
+void loop()
+{
+  
+}
+
+float hipotenusa(float catetoA, float catetoB)
+{
+  return sqrt(sq(catetoA) + sq(catetoB)); 
+}
