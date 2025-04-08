@@ -1,0 +1,170 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+#include <Bounce2.h>
+#define pinLed1 15
+#define pinLed2 2
+#define pinLed3 4
+#define pinLed4 5
+#define pinBotao1 23
+#define pinBotao2 19
+#define pinBotao3 18
+
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+Bounce botaoboot = Bounce();
+byte coracao[] = {
+    B00000,
+    B00000,
+    B01010,
+    B10101,
+    B10001,
+    B01010,
+    B00100,
+    B00000};
+
+void setup()
+{
+  Serial.begin(9600);
+  botaoboot.attach(pinBotao1, INPUT_PULLUP);
+  pinMode(pinLed1, OUTPUT);
+  pinMode(pinBotao1, INPUT_PULLUP);
+  pinMode(pinBotao2, INPUT_PULLUP);
+  pinMode(pinBotao3, INPUT_PULLUP);
+  lcd.init();
+  lcd.createChar(0, coracao);
+  lcd.setCursor(1, 0);
+  lcd.print(">ligar LED 1");
+  lcd.setCursor(1, 1);
+  lcd.print(" ligar LED 2");
+  lcd.setCursor(1, 2);
+  lcd.print(" ligar LED 3");
+  lcd.setCursor(1, 3);
+  lcd.print(" ligar LED 4");
+  lcd.backlight();
+  lcd.write(0);
+}
+void loop()
+{
+  // BOTAO 1
+  static unsigned long estadoAnteriorb1 = 0;
+  static unsigned long tempoUltimaMudancab1 = 0;
+  bool estadobotao1 = digitalRead(pinBotao1);
+  static bool ultimaAcaob1 = 1;
+  // BOTAO 2
+  static unsigned long estadoAnteriorb2 = 0;
+  bool estadobotao2 = digitalRead(pinBotao2);
+  static unsigned long tempoUltimaMudancab2 = 0;
+  static bool ultimaAcaob2 = 1;
+  // BOTAO 3
+  static unsigned long estadoAnteriorb3 = 0;
+  bool estadobotao3 = digitalRead(pinBotao3);
+  static unsigned long tempoUltimaMudancab3 = 0;
+  static bool ultimaAcaob3 = 1;
+
+  unsigned long tempoAtual = millis();
+  static bool posicao = 0;
+  botaoboot.update;
+  if (botaoboot.fell())
+  //! BOTAO 1
+  if (estadobotao1 != estadoAnteriorb1)
+  {
+    tempoUltimaMudancab1 = tempoAtual;
+  }
+
+  if (tempoAtual - tempoUltimaMudancab1 > 50)
+  {
+
+    if (estadobotao1 != ultimaAcaob1)
+    {
+      ultimaAcaob1 = estadobotao1;
+
+      if (estadobotao1 == 0)
+      {
+         for (int i = 0; i <= 3; i++) {  
+          posicao++;
+         }
+      }
+      else
+      {
+      }
+    }
+  }
+  estadoAnteriorb1 = estadobotao1;
+
+  //! BOTAO 2
+  if (estadobotao2 != estadoAnteriorb2)
+  {
+    tempoUltimaMudancab2 = tempoAtual;
+  }
+
+  if (tempoAtual - tempoUltimaMudancab2 > 50)
+  {
+
+    if (estadobotao2 != ultimaAcaob2)
+    {
+      ultimaAcaob2 = estadobotao2;
+
+      if (estadobotao2 == 0)
+      {
+        for (int i = 0; i = 3; i--) {  
+          posicao--;
+         }
+       
+      }
+      else
+      {
+      }
+    }
+  }
+  estadoAnteriorb2 = estadobotao2;
+
+  //! BOTAO 3
+  if (estadobotao3 != estadoAnteriorb3)
+  {
+    tempoUltimaMudancab3 = tempoAtual;
+  }
+
+  if (tempoAtual - tempoUltimaMudancab3 > 50)
+  {
+
+    if (estadobotao3 != ultimaAcaob3)
+    {
+      ultimaAcaob3 = estadobotao3;
+
+      if (estadobotao3 == 0)
+      {
+
+        if (!posicao && estadobotao3 == 0)
+        {
+         digitalWrite(pinLed1, HIGH);
+        }
+
+        else if (posicao && estadobotao3 == 0)
+        {
+         digitalWrite(pinLed1, LOW);
+        }
+      }
+
+      else
+      {
+      }
+    }
+  }
+  estadoAnteriorb3 = estadobotao3;
+
+  if (!posicao)
+  {
+    lcd.setCursor(1, 1);
+    lcd.print(">");
+    lcd.setCursor(1, 2);
+    lcd.print(" ");
+  }
+  else
+  {
+    lcd.setCursor(1, 2);
+    lcd.print(">");
+    lcd.setCursor(1, 1);
+    lcd.print(" ");
+  }
+
+
+}
