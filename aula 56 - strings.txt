@@ -1,0 +1,72 @@
+#include <Arduino.h>
+char palavra[10] = "OLA MUNDO"; //! vetor com 10 caracteres
+char palavra2[10] = "OLA MUNDO";
+
+String palavra3 = "HOJE E QUINTA";
+
+void setup()
+{
+  strcpy(palavra, "SENAI"); //! substitui o que esta no vetor
+  if (strcmp(palavra, "SENAI"))
+    ; //! SE FOR IGUAL RETORNA 0
+  {
+  }
+  if (strncmp(palavra2, "OLA", 3) == 0) //! PARA COMPARAR APENAS 3 LETRAS DA PALAVRA retorna 0 se for igual
+  {
+  }
+  if (strstr(palavra2, "MUNDO") == 0) //! ENCONTRAR UMA PALAVRA EM UMA FRASE
+  {
+  }
+
+  //*-----------------------------------------------------------------------------
+  Serial.println(palavra3.length());          //! retorna o numero de letras do objeto da classe string
+  Serial.println(palavra3.charAt(10));        //! retorna a letra que esta na posicao do parenteses
+  Serial.println(palavra3.substring(10, 13)); //! retorna da 10 posicao ate a 13
+  Serial.println(palavra3.indexOf('U'));      //! retorna a posicao que a primeira letra "u" esta
+  Serial.println(palavra3.lastIndexOf('E'));  //! retorna a posicao que a ultima letra "e" esta
+
+  if (palavra3.equals("HOJE EH QUINTA") == 1) //! retorna verdadeiro se forem iguais
+    Serial.println("sao iguais");
+
+  if (palavra3.equalsIgnoreCase("HOJE EH QUINTA") == 1) //! retorna verdadeiro se forem iguais  ignorando letras maiusculas
+    Serial.println("sao iguais");
+
+  if (palavra3.startsWith("HOJE") == 1) //! retorna verdadeiro se comacar com determinado texto
+    Serial.println("comeca HOJE");
+
+  if (palavra3.endsWith("inta") == 1) //! retorna verdadeiro se a palavra terminar com determinado texto
+    Serial.println("termina com inta");
+
+  String valor = "123";
+  int valorNumerico = valor.toInt(); //! converte de texto para numero 123(texto) - 123(numero)
+
+  String valor2 = "10.5";
+  float valorNumerico2 = valor2.toFloat();
+
+  //* EXEMPLO: TRANSFORME O NUMERO DO TEXTO EM VALOR NUMERICO TIPO INTEIRO
+  String mensagem = "valor = 50";
+
+  int tamanho = mensagem.length(); //* MEDIR O TAMANHO DO TEXTO
+
+  String extracao = mensagem.substring(9, tamanho); //*EXTRAIR O NUMERO DO LUGAR 9 ATE O FIM DO TEXTO
+
+  int numero = extracao.toInt(); //* TRANFORMOU O NUMERO EM INT
+
+  Serial.println(numero * 2);
+
+  palavra3.toLowerCase(); //*alterar todas as letras para minusculas
+  palavra3.toUpperCase(); //*alterar todas as letras para maiusculas
+
+  String textoLed = "Led = on";
+  Serial.print(textoLed);
+  textoLed.replase("ON", "OFF"); //* substitui uma palavra por outra
+
+  String novaFrase = "texto   ";
+  novaFrase.trim(); //* REMOVE OS ESPACOS DO FIM DO TEXTO
+
+  novaFrase.concat(" adicionado"); //* adiciona un texto a string
+}
+
+void loop()
+{
+}
