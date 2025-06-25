@@ -1,0 +1,112 @@
+#include <Arduino.h>
+#include <ArduinoJson.h>
+#include <Bounce2.h>
+#include <BluetoothSerial.h>
+// JSON, que significa JavaScript Object Notation, é um formato leve e fácil de ler para estruturar e trocar dados.
+
+//****Definicoes****
+const char enderecoSlave[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; // vetor do endereco do slave
+#define num_botoes 7                                               // 7 botoes
+const char pinJoystick[num_botoes] = {13, 12, 14, 27, 26, 25, 33}; // a,b,c,d,e,f,k//vetor para definir todos os pinos dos botoes de uma vez
+
+// TODO fazer os analogicos x y
+
+//****Objetos****
+BluetoothSerial BT;
+Bounce *joystick = new Bounce[num_botoes]; // coloca um nome no Bounce para todos os pinos
+JsonDocument doc;
+
+//****Variaveis****
+
+//****prototipos das funcoes ****
+void iniciarBT();
+void reconectarBT();
+
+enum pinBotoes //"define" que vai servir para voce colocar um nome e nao precisar lembrar das posicoes que estao no vetor
+{
+  botaoA = 0,
+  botaoB = 1,
+  botaoC = 2,
+  botaoD = 3,
+  botaoE = 4,
+  botaoF = 5,
+  botaoK = 6,
+};
+
+void setup()
+{
+  Serial.begin(9600);
+  iniciarBT();
+
+  for (char i = 0; i < num_botoes; i++) // faz o attach de todos os pinos do 0 ao 6
+    joystick[i].attach(pinJoystick[i], INPUT);
+}
+
+void loop()
+{
+  bool atualizacao = 0;
+  int mudancaBotoes[num_botoes] = {0,0,0,0,0,0,0};
+  int estadoBotoes[num_botoes] = {0,0,0,0,0,0,0};
+
+  doc.clear();// limpa o json
+  for (char j = 0; j < num_botoes; j++) // faz o update de todos os botoes
+  {
+    joystick[j].update();
+
+    if (joystick[j].changed()) // verifica se houve alguma alteracao no botao
+    {
+      doc["botao" + String(j)] = joystick[j].read(); //le todos os botoes
+      mudancaBotoes[j] = 1; //para saber se houve uma mudanca 
+      estadoBotoes[j] = joystick[j].read(); //para saber se esta apertado 
+      atualizacao = 1;
+    }
+  }
+
+  if(atualizacao)
+  {
+  String payload;
+  serializeJson(doc, payload);
+  }
+
+  if (BT.connected()) // verifica se conectou
+  {
+  }
+  else
+  {
+    reconectarBT();
+  }
+}
+
+void reconectarBT()
+{
+  if (BT.connected()) // verifica se conectou
+  {
+    return; // sai da funcao se tiver conectado
+  }
+  Serial.println("tentando reconectar...");
+  BT.end(); // finaiza bluetooth
+  delay(1000);
+  iniciarBT(); // inicia bluetooth
+}
+
+void iniciarBT()
+{
+  bool iniciouSucesso = BT.begin("masterErica", true); // retorna verdadeiro caso tenha iniciado o bluetooth
+
+  if (iniciouSucesso) // se o bluetooth iniciou
+  {
+    Serial.println("O Bluetooth iniciou como master com sucesso");
+  }
+  else // se nao conectou
+  {
+    Serial.println("erro ao iniciar como master");
+    Serial.println("o ESP32 sera reiniciado em: ");
+    for (char i = 3; i >= 0; i--) // conta de 3 a 0
+    {
+      Serial.printf("%d...\n\r", i); // manda no serial a contagem
+      delay(1000);                   // espera 1s
+    }
+    ESP.restart(); // reinicia o ESP sozinho
+  }
+  BT.connect(enderecoSlave); // conecta com o endereco do slave
+}
